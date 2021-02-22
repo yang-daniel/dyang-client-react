@@ -23,9 +23,15 @@ class CourseManager extends React.Component {
       findAllCourses()
       .then(courses => this.setState({courses}))
 
+  getTitle = () => {
+    let title = document.getElementsByClassName('wbdv-taskbar-name')[0].value;
+    if (title == "") {title = "New Course"}
+    return(title)
+  }
+
   addCourse = () => {
     const newCourse = {
-      title: "New Course",
+      title: this.getTitle(),
       owner: "New Owner",
       lastModified: "Never",
       image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8c2Nob29sfGVufDB8fDB8&ixlib=rb-1.2.1&w=1000&q=80",
@@ -40,7 +46,6 @@ class CourseManager extends React.Component {
             course
           ]
         })))
-    document.getElementsByClassName('wbdv-title-fld')[0].value = ''
 
   }
 
@@ -55,27 +60,57 @@ class CourseManager extends React.Component {
     })
   }
 
+
   render() {
     return(
         <div>
-          <Link to="/">
-            <i className="fas fa-2x fa-home float-right"></i>
-          </Link>
-          <h1>Course Manager</h1>
-          <button onClick={this.addCourse}>Add Course</button>
+          <Route>
+            {
+              <div className="navbar" >
+                <div>
+                  <Link to="/">
+                    <i className="fas fa-bars fa-2x"/>
+                  </Link>
+                </div>
+
+                <div className="col-lg-auto d-none d-lg-block">
+                  <h3>
+                    Course Manager
+                  </h3>
+                </div>
+
+                <div className="col-8 col-auto">
+                  <input className="form-control input wbdv-taskbar-name"
+                         placeholder="New Course"/>
+                </div>
+
+                <div className="col-auto float-right">
+                  <i onClick={this.addCourse}
+                    className="fas fa-plus-circle fa-2x wbdv-red"/>
+                </div>
+              </div>
+            }
+          </Route>
           <Route path="/courses/table">
             <CourseTable
-                updateCourse={this.updateCourse}
                 deleteCourse={this.deleteCourse}
+                updateCourse={this.updateCourse}
                 courses={this.state.courses}/>
           </Route>
           <Route path="/courses/grid">
             <CourseGrid
                 deleteCourse={this.deleteCourse}
+                updateCourse={this.updateCourse}
                 courses={this.state.courses}/>
           </Route>
           <Route path="/courses/editor"
                  render={(props) => <CourseEditor {...props}/>}>
+          </Route>
+          <Route>
+            {
+              <i onClick={this.addCourse}
+                 className="fas fa-plus-circle fa-5x wbdv-red wbdv-bottom-right"></i>
+            }
           </Route>
         </div>
     )

@@ -11,3 +11,56 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/*Coloring*/
+.wbdv-red {
+  color: red;
+}
+
+.wbdv-light-blue {
+  color: cornflowerblue;
+}
+
+.wbdv-blue {
+  color: blue;
+}
+
+.wbdv-black {
+  color: black;
+}
+
+.wbdv-green {
+  color: green;
+}
+
+.wbdv-white {
+  color: white;
+}
+
+
+/*Positioning*/
+
+.wbdv-hidden {
+  display: none;
+}
+
+.wbdv-show {
+  display: block;
+}
+
+.wbdv-top-right {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+}
+.wbdv-bottom {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+}
+
+.wbdv-bottom-right {
+  position: fixed;
+  bottom: 25px;
+  right: 25px;
+}
