@@ -109,7 +109,7 @@ class CourseManager extends React.Component {
           <Route>
             {
               <i onClick={this.addCourse}
-                 className="fas fa-plus-circle fa-5x wbdv-red wbdv-bottom-right"></i>
+                 className="fas fa-plus-circle fa-3x wbdv-red wbdv-bottom-right"></i>
             }
           </Route>
         </div>

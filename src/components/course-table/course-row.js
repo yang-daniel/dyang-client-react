@@ -14,6 +14,7 @@ const CourseRow = (
   const [newTitle, setNewTitle] = useState(title)
   const [newOwner, setNewOwner] = useState(owner)
 
+  // using hooks for title
   const saveTitle = () => {
     setEditing(false)
     const newCourse = {

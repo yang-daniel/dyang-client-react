@@ -2,26 +2,18 @@ import React from 'react'
 import CourseCard from "./course-card";
 import {Link} from "react-router-dom";
 
-const CourseGrid = (
-    {
-      courses,
-      deleteCourse,
-      updateCourse}) =>
-    <div className="container-fluid">
-        <div className="navbar">
-
-          <h5 className="nav-item w-50 d-none d-md-block">
+const CourseGrid = ({courses, deleteCourse, updateCourse}) =>
+    <div>
+      <table className="table">
+        <tr>
+          <th className="d-none d-md-table-cell w-50">
             Recent Documents
-          </h5>
-
-          <h5 className="nav-item w-25	d-none d-md-block">
-            <div>
-            Owned by me <i className="fas fa-arrow-down ml-1"/>
-            </div>
-          </h5>
-
-          <div>
-            <div className="row float-right">
+          </th>
+          <th className="d-none d-md-table-cell">
+            Owned By
+          </th>
+          <th>
+            <div className="form-row float-right">
               <div className="col-auto">
                 <i className="fas fa-folder"></i>
               </div>
@@ -32,18 +24,21 @@ const CourseGrid = (
                 <i className="fas fa-list"></i>
               </Link>
             </div>
-
-          </div>
-        </div>
-
+          </th>
+        </tr>
+      </table>
       <div className="row">
-        {courses.map(course =>
+        {
+          courses.map(course =>
               <CourseCard
                   course={course}
                   deleteCourse={deleteCourse}
                   updateCourse={updateCourse}
-              />)}
+              />
+          )
+        }
       </div>
     </div>
+
 
 export default CourseGrid

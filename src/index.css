@@ -40,27 +40,28 @@ code {
 
 /*Positioning*/
 
+.wbdv-bottom {
+  bottom: 10px;
+  width: 100%;
+  position: absolute;
+}
+
+.wbdv-bottom-right {
+  bottom: 25px;
+  right: 25px;
+  position: fixed;
+}
+
+.wbdv-top-right {
+  top: 10px;
+  right: 15px;
+  position: absolute;
+}
+
 .wbdv-hidden {
   display: none;
 }
 
 .wbdv-show {
   display: block;
-}
-
-.wbdv-top-right {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-}
-.wbdv-bottom {
-  position: absolute;
-  bottom: 10px;
-  width: 100%;
-}
-
-.wbdv-bottom-right {
-  position: fixed;
-  bottom: 25px;
-  right: 25px;
 }
