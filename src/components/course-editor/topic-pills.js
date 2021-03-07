@@ -13,12 +13,16 @@ const TopicPills = (
       deleteTopic,
       updateTopic
     }) => {
-  const {layout,courseId, moduleId, lessonId, topicId} = useParams();
+  const {layoutId, courseId, moduleId, lessonId, topicId} = useParams();
   useEffect(() => {
-    if(lessonId !== "undefined" && typeof lessonId !== "undefined") {
+    console.log("LOAD TOPICS FOR LESSON: " + lessonId)
+    if(moduleId !== "undefined" && typeof moduleId !== "undefined"
+        && lessonId !== "undefined" && typeof lessonId !== "undefined") {
       findTopicsForLesson(lessonId)
     }
-  }, [lessonId])
+  }, [moduleId, lessonId])
+
+
 
   return(
       <div>
@@ -29,7 +33,7 @@ const TopicPills = (
                 <li className="nav-item">
                   <EditableItem
                       active={topic._id === topicId}
-                      to={`/courses/editor/${courseId}/${moduleId}/${lessonId}/${topic._id}`}
+                      to={`/courses/${layoutId}/edit/${courseId}/modules/${moduleId}/lessons/${lessonId}/topics/${topic._id}`}
                       updateItem={updateTopic}
                       deleteItem={deleteTopic}
                       item={topic}/>
@@ -45,6 +49,7 @@ const TopicPills = (
 const stpm = (state) => ({
   topics: state.topicReducer.topics
 })
+
 const dtpm = (dispatch) => ({
   findTopicsForLesson: (lessonId) => {
     topicService.findTopicsForLesson(lessonId)

@@ -12,12 +12,18 @@ const LessonTabs = (
       updateLesson,
       deleteLesson,
     }) => {
-  const {layout, courseId, moduleId, lessonId} = useParams();
+  const {layoutId, courseId, moduleId, lessonId} = useParams();
   useEffect(() => {
     if(moduleId !== "undefined" && typeof moduleId !== "undefined") {
       findLessonsForModule(moduleId)
     }
-  }, [moduleId])
+  }, [moduleId]);
+  useEffect(() => {
+    // console.log(lessons)
+    if (moduleId !== "undefined" && typeof moduleId !== "undefined")
+      findLessonsForModule(moduleId);
+  }, [courseId]);
+
   return(
       <div>
         <h2>Lessons</h2>
@@ -27,7 +33,7 @@ const LessonTabs = (
                 <li className="nav-item">
                   <EditableItem
                       active={lesson._id === lessonId}
-                      to={`/courses/${layout}/edit/${courseId}/modules/${module._id}`}
+                      to={`/courses/${layoutId}/edit/${courseId}/modules/${moduleId}/lessons/${lesson._id}`}
                       updateItem={updateLesson}
                       deleteItem={deleteLesson}
                       item={lesson}/>
@@ -43,40 +49,38 @@ const LessonTabs = (
 const stpm = (state) => ({
   lessons: state.lessonReducer.lessons
 })
-const dtpm = (dispatch) => ({
-  findLessonsForModule: (moduleId) => {
-    lessonService
-    .findLessonsForModule(moduleId)
-    .then(lessons => dispatch({
-      type: "FIND_LESSONS",
-      lessons
-    }))
-  },
+const dtpm = (dispatch) => {
+  return {
+    findLessonsForModule: (moduleId) => {
+      lessonService.findLessonsForModule(moduleId)
+      .then(lessons => dispatch({
+        type: "FIND_LESSONS",
+        lessons
+      }))
+    },
+    createLessonForModule: (moduleId) => {
+      console.log("CREATE LESSON FOR MODULE: " + moduleId)
+      lessonService
+      .createLessonForModule(moduleId, {title: "New Lesson"})
+      .then(lesson => dispatch({
+        type: "CREATE_LESSON",
+        lesson
+      }))
+    },
+    updateLesson: (lesson) =>
+        lessonService.updateLesson(lesson._id, lesson)
+        .then(status => dispatch({
+          type: "UPDATE_LESSON",
+          lesson
+        })),
+    deleteLesson: (lesson) =>
+        lessonService.deleteLesson(lesson._id)
+        .then(status => dispatch({
+          type: "DELETE_LESSON",
+          lessonToDelete: lesson
+        }))
 
-  createLessonForModule: (moduleId) => {
-    lessonService
-    .createLessonForModule(moduleId, {title: "New Lesson"})
-    .then(lesson => dispatch({
-      type: "CREATE_LESSON",
-      lesson
-    }))
-  },
-
-  updateLesson: (lesson) => {
-    lessonService.updateLesson(lesson._id,lesson)
-    .then(status => dispatch({
-      type: "UPDATE_LESSON",
-      lesson
-    }))
-  },
-  deleteLesson: (lesson) => {
-    lessonService.deleteLesson(lesson._id)
-    .then(status => dispatch({
-      type: "DELETE_LESSON",
-      lessonToDelete:lesson
-    }))
-  },
-
-})
+  }
+}
 
 export default connect(stpm, dtpm)(LessonTabs)

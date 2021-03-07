@@ -29,7 +29,7 @@ const CourseRow = (
       <tr>
         <td>
           {!editing &&
-            <Link to={`/courses/editor/${course._id}`} className="form-row">
+            <Link to={`/courses/table/edit/${course._id}`} className="form-row">
               <div className="col-auto">
                 <i className="fas fa-file wbdv-blue"/>
               </div>
