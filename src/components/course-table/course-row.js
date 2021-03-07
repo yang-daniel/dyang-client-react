@@ -29,9 +29,9 @@ const CourseRow = (
       <tr>
         <td>
           {!editing &&
-            <Link to="/courses/editor" className="form-row">
+            <Link to={`/courses/editor/${course._id}`} className="form-row">
               <div className="col-auto">
-                <i className="fas fa-file wbdv-blue"></i>
+                <i className="fas fa-file wbdv-blue"/>
               </div>
               <div className="col-auto">
                 {title}
@@ -66,21 +66,21 @@ const CourseRow = (
             <div className="col-auto">
               {editing &&
               <i onClick={() =>
-                  saveTitle()}
-                 className="fas fa-check wbdv-green"></i>}
+                saveTitle()}
+                className="fas fa-check wbdv-green"/>}
             </div>
             <div className="col-auto">
               {editing &&
               <i onClick={() =>
-                  (deleteCourse(course),
-                  setEditing(false))}
-                 className="fas fa-trash wbdv-red"></i>}
+                (deleteCourse(course),
+                    setEditing(false))}
+                className="fas fa-trash wbdv-red"/>}
             </div>
             <div className="col-auto">
               {!editing &&
               <i onClick={() =>
-                  setEditing(true)}
-                 className="fas fa-edit wbdv-blue"></i>}
+                setEditing(true)}
+                className="fas fa-edit wbdv-blue"/>}
             </div>
           </div>
         </td>

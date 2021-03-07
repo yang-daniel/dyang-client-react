@@ -66,7 +66,7 @@ const CourseCard = (
 
             <div className="form-row mt-2">
               <div className="col-12 float-left">
-                <Link to="/courses/editor" className="btn btn-primary">
+                <Link to={`/courses/grid/edit/${course._id}`} className="btn btn-primary">
                   {course.title}
                 </Link>
               </div>
