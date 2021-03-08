@@ -30,7 +30,7 @@ const TopicPills = (
         <ul className="nav nav-pills">
           {
             topics.map(topic =>
-                <li className="nav-item">
+                <li key={topic._id} className="nav-item">
                   <EditableItem
                       active={topic._id === topicId}
                       to={`/courses/${layoutId}/edit/${courseId}/modules/${moduleId}/lessons/${lessonId}/topics/${topic._id}`}
@@ -40,9 +40,13 @@ const TopicPills = (
                 </li>
             )
           }
-          <li>
-            <i onClick={() => createTopicForLesson(lessonId)} className="fas fa-plus"></i>
-          </li>
+          {
+            (lessonId !== "undefined" && typeof lessonId !== "undefined") &&
+            <li>
+              <i onClick={() => createTopicForLesson(lessonId)}
+                 className="fas fa-plus"></i>
+            </li>
+          }
         </ul>
       </div>)}
 
@@ -54,7 +58,7 @@ const dtpm = (dispatch) => ({
   findTopicsForLesson: (lessonId) => {
     topicService.findTopicsForLesson(lessonId)
     .then(topics => dispatch({
-      type: "FIND_TOPIC",
+      type: "FIND_TOPICS_FOR_LESSON",
       topics
     }))
   },

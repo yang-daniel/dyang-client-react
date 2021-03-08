@@ -30,7 +30,7 @@ const LessonTabs = (
         <ul className="nav nav-pills">
           {
             lessons.map(lesson =>
-                <li className="nav-item">
+                <li key={lesson._id} className="nav-item">
                   <EditableItem
                       active={lesson._id === lessonId}
                       to={`/courses/${layoutId}/edit/${courseId}/modules/${moduleId}/lessons/${lesson._id}`}
@@ -40,9 +40,13 @@ const LessonTabs = (
                 </li>
             )
           }
-          <li>
-            <i onClick={() => createLessonForModule(moduleId)} className="fas fa-plus"></i>
-          </li>
+          {
+            (moduleId !== "undefined" && typeof moduleId !== "undefined") &&
+            <li>
+              <i onClick={() => createLessonForModule(moduleId)}
+                 className="fas fa-plus"></i>
+            </li>
+          }
         </ul>
       </div>)}
 
@@ -54,7 +58,7 @@ const dtpm = (dispatch) => {
     findLessonsForModule: (moduleId) => {
       lessonService.findLessonsForModule(moduleId)
       .then(lessons => dispatch({
-        type: "FIND_LESSONS",
+        type: "FIND_LESSONS_FOR_MODULE",
         lessons
       }))
     },

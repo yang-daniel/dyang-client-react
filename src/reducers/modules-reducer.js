@@ -8,30 +8,18 @@ const initialState = {
 
 const moduleReducer = (state=initialState, action) => {
   switch (action.type) {
-    case "FIND_MODULES_FOR_COURSE":
-      return {
-        ...state,
-        modules: action.modules
-      }
     case "CREATE_MODULE":
-      const newState = {
+      return {
         modules: [
           ...state.modules,
           action.module
         ]
       }
-      return newState
-    case "DELETE_MODULE":
-      const newState1 = {
-        modules: state.modules.filter(module => {
-          if(module._id === action.moduleToDelete._id) {
-            return false
-          } else {
-            return true
-          }
-        })
+    case "FIND_MODULES_FOR_COURSE":
+      return {
+        ...state,
+        modules: action.modules
       }
-      return newState1
     case "UPDATE_MODULE":
       return {
         modules: state.modules.map(m => {
@@ -39,6 +27,16 @@ const moduleReducer = (state=initialState, action) => {
             return action.module
           } else {
             return m
+          }
+        })
+      }
+    case "DELETE_MODULE":
+      return {
+        modules: state.modules.filter(module => {
+          if (module._id === action.moduleToDelete._id) {
+            return false
+          } else {
+            return true
           }
         })
       }

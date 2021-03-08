@@ -12,20 +12,10 @@ const lessonReducer = (state=initialState, action) => {
           action.lesson
         ]
       }
-    case "FIND_LESSONS":
+    case "FIND_LESSONS_FOR_MODULE":
       return {
         ...state,
         lessons: action.lessons
-      }
-    case "DELETE_LESSON":
-      return {
-        lessons: state.lessons.filter(lesson => {
-          if (lesson._id === action.lessonToDelete._id) {
-            return false
-          } else {
-            return true
-          }
-        })
       }
 
     case "UPDATE_LESSON":
@@ -35,6 +25,17 @@ const lessonReducer = (state=initialState, action) => {
             return action.lesson
           } else {
             return m
+          }
+        })
+      }
+
+    case "DELETE_LESSON":
+      return {
+        lessons: state.lessons.filter(lesson => {
+          if (lesson._id === action.lessonToDelete._id) {
+            return false
+          } else {
+            return true
           }
         })
       }

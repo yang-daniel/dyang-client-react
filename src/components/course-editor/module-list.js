@@ -23,7 +23,7 @@ const ModuleList = (
         <ul className="list-group">
           {
             myModules.map(module =>
-                <li className={`list-group-item ${module._id === moduleId ? 'active' : ''}`}>
+                <li key={module._id} className={`list-group-item ${module._id === moduleId ? 'active' : ''}`}>
                   <EditableItem
                       to={`/courses/${layoutId}/edit/${courseId}/modules/${module._id}`}
                       updateItem={updateModule}
@@ -59,11 +59,11 @@ const dtpm = (dispatch) => {
           type: "DELETE_MODULE",
           moduleToDelete: moduleToDelete
         })),
-    updateModule: (moduleToUpdate) =>
-        moduleService.updateModule(moduleToUpdate._id, module)
+    updateModule: (module) =>
+        moduleService.updateModule(module._id, module)
         .then(status => dispatch({
           type: "UPDATE_MODULE",
-          moduleToUpdate
+          module
         })),
     findModulesForCourse: (courseId) => {
       moduleService.findModulesForCourse(courseId)
