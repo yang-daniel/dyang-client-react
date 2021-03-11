@@ -13,7 +13,7 @@ export default () =>
           Courses Grid
         </Link>
         <Link to="/courses/editor" className="list-group-item">
-          Course Editor
+          Course Editor (defunct)
         </Link>
       </div>
     </>

@@ -34,7 +34,7 @@ const CourseEditor = ({history}) => {
             {/*<i className="fas fa-times float-right"*/}
             {/*   onClick={() => history.goBack()}></i>*/}
             <Link to={`/courses/${layoutId}`}>
-              <i className="fas fa-times float-left"></i>
+              <i className="fas fa-times float-left mt-1 mr-4"></i>
             </Link>
             <span className="add-padding-left">
                       {courseName}

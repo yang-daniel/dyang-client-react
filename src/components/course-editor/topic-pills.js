@@ -16,15 +16,15 @@ const TopicPills = (
   const {layoutId, courseId, moduleId, lessonId, topicId} = useParams();
   useEffect(() => {
     console.log("LOAD TOPICS FOR LESSON: " + lessonId)
-    if(moduleId !== "undefined" && typeof moduleId !== "undefined"
-        && lessonId !== "undefined" && typeof lessonId !== "undefined") {
+    if(lessonId !== "undefined" && typeof lessonId !== "undefined") {
       findTopicsForLesson(lessonId)
     }
-  }, [moduleId, lessonId])
+  }, [lessonId])
 
 
 
   return(
+      (lessonId !== "undefined" && typeof lessonId !== "undefined") &&
       <div>
         {/*<h2>Topics</h2>*/}
         <ul className="nav nav-pills">

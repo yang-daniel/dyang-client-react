@@ -25,6 +25,7 @@ const LessonTabs = (
   }, [courseId]);
 
   return(
+      (moduleId !== "undefined" && typeof moduleId !== "undefined") &&
       <div>
         <h2>Lessons</h2>
         <ul className="nav nav-pills">
