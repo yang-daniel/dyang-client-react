@@ -1,5 +1,5 @@
-const TOPICS_URL = process.env.REACT_APP_TOPIC_URL;
-const WIDGETS_URL = process.env.REACT_APP_WIDGET_URL;
+const TOPICS_URL = "https://wbdv-sp21-02-dyang-server-java.herokuapp.com/api/topics"
+const WIDGETS_URL = "https://wbdv-sp21-02-dyang-server-java.herokuapp.com/api/widgets"
 
 export const createWidget = (topicId, widget) =>
     fetch(`${TOPICS_URL}/${topicId}/widgets`, {
