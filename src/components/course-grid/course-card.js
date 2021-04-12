@@ -59,6 +59,9 @@ const CourseCard = (
               {!editing &&
                 <div>
                   <h5 className="card-title">{course.title}</h5>
+                  <Link to={`/courses/${course._id}/quizzes`}>
+                    Quizzes
+                  </Link>
                   <p className="card-text"> <small>{course.desc}</small></p>
                 </div>
               }

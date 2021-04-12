@@ -62,6 +62,11 @@ const CourseRow = (
           {lastModified}
         </td>
         <td>
+          <Link to={`/courses/${course._id}/quizzes`}>
+            Quizzes
+          </Link>
+        </td>
+        <td>
           <div className="form-row float-right">
             <div className="col-auto">
               {editing &&
