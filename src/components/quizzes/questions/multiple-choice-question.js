@@ -2,7 +2,7 @@ import React, {useState} from "react";
 
 const MultipleChoiceQuestion = ({question}) => {
 
-  const [yourAnswer, setYourAnswer] = useState("")
+  const [userAnswer, setUserAnswer] = useState("")
   const [grade, setGrade] = useState(false)
 
   return (
@@ -11,10 +11,10 @@ const MultipleChoiceQuestion = ({question}) => {
           {question.question}
           {grade &&
             <div className="float-right">
-              {question.correct === yourAnswer &&
+              {question.correct === userAnswer &&
                 <i className="fas fa-check wbdv-green"/>
               }
-              {question.correct !== yourAnswer &&
+              {question.correct !== userAnswer &&
                 <i className="fas fa-times wbdv-red"/>
               }
             </div>
@@ -26,21 +26,21 @@ const MultipleChoiceQuestion = ({question}) => {
 
               return (
                   <li className={`list-group-item 
-                                ${!grade?"": (yourAnswer === choice && question.correct === choice)?'list-group-item-success':
-                          (yourAnswer === choice && question.correct !== choice)?'list-group-item-danger':""}`}>
+                                ${!grade ? "" : (userAnswer === choice && question.correct === choice) ? 'list-group-item-success':
+                          (userAnswer === choice && question.correct !== choice) ? 'list-group-item-danger' : ""}`}>
                     <div className="form-check">
-                      <input onClick={() => {setYourAnswer(choice)}}
+                      <input onClick={() => {setUserAnswer(choice)}}
                              className="form-check-input"
                              type="radio"
                              name={question._id}
                              disabled={grade}/> {choice}
                       {grade &&
                         <>
-                          {(yourAnswer === choice && question.correct === choice) &&
-                            <i className="fas fa-check wbdv-color-success align-middle float-right"/>
+                          {(userAnswer === choice && question.correct === choice) &&
+                            <i className="fas fa-check wbdv-green align-middle float-right"/>
                           }
-                          {(yourAnswer === choice && question.correct !== choice) &&
-                            <i className="fas fa-times wbdv-color-danger align-middle float-right"/>
+                          {(userAnswer === choice && question.correct !== choice) &&
+                            <i className="fas fa-times wbdv-red align-middle float-right"/>
                           }
                         </>
                       }
@@ -51,7 +51,8 @@ const MultipleChoiceQuestion = ({question}) => {
           }
         </ul>
         <br/>
-        <p>Your Answer: {yourAnswer}</p>
+
+        <p>Your Answer: {userAnswer}</p>
         <button onClick={() => {setGrade(true)}}
                 type="button"
                 className="btn btn-success">Grade</button>

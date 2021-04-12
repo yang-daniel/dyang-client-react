@@ -19,7 +19,7 @@ const Quiz = (
   return(
       <div>
         <h3>
-          <Link className="fas fa-times"
+          <Link className="fas fa-times mr-2"
                 to={`/courses/${courseId}/quizzes`} exact={true}>
           </Link>
           Quiz {quizId}

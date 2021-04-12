@@ -18,7 +18,7 @@ const QuizzesList = (
   return (
       <div>
         <h2>
-          <Link className="fas fa-times wbdv-tab"
+          <Link className="fas fa-times mr-2"
                 to="/courses/table" exact={true}>
           </Link>
           Quizzes
