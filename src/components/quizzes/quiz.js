@@ -2,20 +2,22 @@ import React, {useEffect, useState} from "react";
 import {Link, useParams} from "react-router-dom"
 import Question from "./questions/question";
 import questionService from "../../services/question-service";
+import quizzesService from '../../services/quiz-service'
 import {connect} from "react-redux";
 
 const Quiz = (
-    {questions,
+    {
+      questions,
       findQuestionsForQuiz
-    }) => {
+    }
+) => {
   const {quizId, courseId} = useParams()
-
+  const [answers, setAnswers] = useState()
+  const [grade, setGrade] = useState(false)
   useEffect(() => {
     findQuestionsForQuiz(quizId)
+    .then((questions) => setAnswers(questions.questions))
   }, [])
-
-
-
   return(
       <div>
         <h3>
@@ -25,20 +27,27 @@ const Quiz = (
           Quiz {quizId}
         </h3>
         <ul className="list-group">
-          {questions.map((question) => {
+          {
+            questions.map((question) => {
               return(
-                  <Question question ={question}/>
+                  <Question question={question}
+                            answers={answers}
+                            setAnswers={setAnswers}
+                            grade={grade}/>
               )
             })
           }
         </ul>
+        <br/>
+        <button
+            onClick={() => {
+              setGrade(true)
+              quizzesService.submitQuiz(quizId, answers)}}
+            type="button"
+            className="btn btn-primary float-right">Submit</button>
       </div>
   )
 }
-
-
-
-
 
 const stpm = (state) => ({
   questions: state.questionReducer.questions

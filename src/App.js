@@ -1,14 +1,15 @@
+
 import CourseManager from "./components/course-manager";
 import {BrowserRouter, Route} from "react-router-dom";
-
 import Home from "./components/course-home"
-import Quiz from "./components/quizzes/quiz";
 import QuizzesList from "./components/quizzes/quizzes-list";
-
+import Quiz from "./components/quizzes/quiz";
 import {combineReducers, createStore} from "redux";
 import quizReducer from "./reducers/quiz-reducer";
-import questionReducer from "./reducers/question-reducer";
 import {Provider} from "react-redux";
+import questionReducer from "./reducers/question-reducer";
+import GradedQuiz from "./components/quizzes/graded-quiz";
+import React from "react";
 
 const reducer = combineReducers({
   quizReducer: quizReducer,
@@ -33,6 +34,9 @@ function App() {
             </Route>
             <Route path="/courses/:courseId/quizzes/:quizId" exact={true}>
               <Quiz/>
+            </Route>
+            <Route path="/courses/:courseId/quizzes/:quizId/:attemptId" >
+              <GradedQuiz/>
             </Route>
           </Provider>
         </div>

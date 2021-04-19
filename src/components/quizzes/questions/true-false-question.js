@@ -1,48 +1,56 @@
-import React, {useState} from "react";
+import React from "react";
 
-const TrueFalseQuestion = ({question}) => {
-
-  const [userAnswer, setUserAnswer] = useState("")
-  const [grade, setGrade] = useState(false)
+const TrueFalseQuestion = (
+    {
+      question,
+      yourAnswer,
+      setYourAnswer,
+      updateAnswers,
+      grade,
+      answers
+    }) => {
 
   return (
       <li className="list-group-item">
         <h5>
           {question.question}
-
-          {grade &&
+          {
+            grade &&
             <div className="float-right">
-              {question.correct === userAnswer &&
+              {
+                question.correct === yourAnswer &&
                 <i className="fas fa-check wbdv-green"/>
               }
-              {question.correct !== userAnswer &&
+              {
+                question.correct !== yourAnswer &&
                 <i className="fas fa-times wbdv-red"/>
               }
             </div>
           }
         </h5>
-
         <ul className="list-group">
-
           <li className={`list-group-item 
-                                ${!grade ? "" :
-              (userAnswer === "true" && question.correct === "true") ? 'list-group-item-success':
-                  (userAnswer === "true" && question.correct === "false") ? 'list-group-item-danger':""}`}>
-
+                                ${!grade?"":
+              (yourAnswer === "true" && question.correct === "true")?'list-group-item-success':
+                  (yourAnswer === "true" && question.correct === "false")?'list-group-item-danger':""}`}>
             <div className="form-check">
-              <input onClick={() => {setUserAnswer("true")}}
+              <input onClick={() => {
+                setYourAnswer("true")
+                question = {...question, answer: "true"}
+                updateAnswers({...question})}}
                      className="form-check-input"
                      type="radio"
                      name={question._id}
                      disabled={grade}/> True
-              {grade &&
+              {
+                grade &&
                 <>
                   {
-                    (userAnswer === "true" && question.correct === "true") &&
+                    (yourAnswer === "true" && question.correct === "true") &&
                     <i className="fas fa-check wbdv-green align-middle float-right"/>
                   }
                   {
-                    (userAnswer === "true" && question.correct !== "true") &&
+                    (yourAnswer === "true" && question.correct !== "true") &&
                     <i className="fas fa-times wbdv-red align-middle float-right"/>
                   }
                 </>
@@ -50,12 +58,14 @@ const TrueFalseQuestion = ({question}) => {
             </div>
           </li>
           <li className={`list-group-item 
-                                ${!grade ? "":
-              (userAnswer === "false" && question.correct === "false") ? 'list-group-item-success' :
-                  (userAnswer === "false" && question.correct === "true") ? 'list-group-item-danger' : ""}`}>
-
+                                ${!grade?"":
+              (yourAnswer === "false" && question.correct === "false")?'list-group-item-success':
+                  (yourAnswer === "false" && question.correct === "true")?'list-group-item-danger':""}`}>
             <div className="form-check">
-              <input onClick={() => {setUserAnswer("false")}}
+              <input onClick={() => {
+                setYourAnswer("false")
+                question = {...question, answer: "false"}
+                updateAnswers({...question})}}
                      className="form-check-input"
                      type="radio"
                      name={question._id}
@@ -64,12 +74,12 @@ const TrueFalseQuestion = ({question}) => {
                 grade &&
                 <>
                   {
-                    (userAnswer === "false" && question.correct === "false") &&
+                    (yourAnswer === "false" && question.correct === "false") &&
                     <i className="fas fa-check wbdv-green align-middle float-right"/>
                   }
                   {
-                    (userAnswer === "false" && question.correct !== "false") &&
-                    <i className="fas fa-times wbdv-green align-middle float-right"/>
+                    (yourAnswer === "false" && question.correct !== "false") &&
+                    <i className="fas fa-times wbdv-red align-middle float-right"/>
                   }
                 </>
               }
@@ -77,10 +87,7 @@ const TrueFalseQuestion = ({question}) => {
           </li>
         </ul>
         <br/>
-        <p>Your Answer: {userAnswer}</p>
-        <button onClick={() => {setGrade(true)}}
-                type="button"
-                className="btn btn-success">Grade</button>
+        <p>Your Answer: {yourAnswer}</p>
       </li>
   )
 }

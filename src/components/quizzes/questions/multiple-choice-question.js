@@ -1,45 +1,59 @@
-import React, {useState} from "react";
+import React from "react";
 
-const MultipleChoiceQuestion = ({question}) => {
-
-  const [userAnswer, setUserAnswer] = useState("")
-  const [grade, setGrade] = useState(false)
+const MultipleChoiceQuestion = (
+    {
+      question,
+      yourAnswer,
+      setYourAnswer,
+      updateAnswers,
+      grade
+    }) => {
 
   return (
       <li className="list-group-item">
         <h5>
           {question.question}
-          {grade &&
+          {
+            grade &&
             <div className="float-right">
-              {question.correct === userAnswer &&
+              {
+                question.correct === yourAnswer &&
                 <i className="fas fa-check wbdv-green"/>
               }
-              {question.correct !== userAnswer &&
+              {
+                question.correct !== yourAnswer &&
                 <i className="fas fa-times wbdv-red"/>
               }
             </div>
           }
         </h5>
-
         <ul className="list-group">
-          {question.choices.map((choice) => {
-
+          {
+            question.choices.map((choice) => {
               return (
                   <li className={`list-group-item 
-                                ${!grade ? "" : (userAnswer === choice && question.correct === choice) ? 'list-group-item-success':
-                          (userAnswer === choice && question.correct !== choice) ? 'list-group-item-danger' : ""}`}>
+                                ${!grade?"":
+                      (yourAnswer === choice && question.correct === choice)?'list-group-item-success':
+                          (yourAnswer === choice && question.correct !== choice)?'list-group-item-danger':""}`}>
                     <div className="form-check">
-                      <input onClick={() => {setUserAnswer(choice)}}
+                      <input onClick={() => {
+                        setYourAnswer(choice)
+                        question = {...question, answer: choice}
+                        updateAnswers({...question})
+                      }}
                              className="form-check-input"
                              type="radio"
                              name={question._id}
                              disabled={grade}/> {choice}
-                      {grade &&
+                      {
+                        grade &&
                         <>
-                          {(userAnswer === choice && question.correct === choice) &&
+                          {
+                            (yourAnswer === choice && question.correct === choice) &&
                             <i className="fas fa-check wbdv-green align-middle float-right"/>
                           }
-                          {(userAnswer === choice && question.correct !== choice) &&
+                          {
+                            (yourAnswer === choice && question.correct !== choice) &&
                             <i className="fas fa-times wbdv-red align-middle float-right"/>
                           }
                         </>
@@ -51,11 +65,7 @@ const MultipleChoiceQuestion = ({question}) => {
           }
         </ul>
         <br/>
-
-        <p>Your Answer: {userAnswer}</p>
-        <button onClick={() => {setGrade(true)}}
-                type="button"
-                className="btn btn-success">Grade</button>
+        <p>Your Answer: {yourAnswer}</p>
       </li>
   )
 }
