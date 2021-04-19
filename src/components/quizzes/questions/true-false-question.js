@@ -7,32 +7,31 @@ const TrueFalseQuestion = (
       setYourAnswer,
       updateAnswers,
       grade,
-      answers
     }) => {
 
   return (
       <li className="list-group-item">
         <h5>
           {question.question}
-          {
-            grade &&
+          {grade &&
             <div className="float-right">
-              {
-                question.correct === yourAnswer &&
+              {question.correct === yourAnswer &&
                 <i className="fas fa-check wbdv-green"/>
               }
-              {
-                question.correct !== yourAnswer &&
+              {question.correct !== yourAnswer &&
                 <i className="fas fa-times wbdv-red"/>
               }
             </div>
           }
         </h5>
         <ul className="list-group">
+
           <li className={`list-group-item 
                                 ${!grade?"":
               (yourAnswer === "true" && question.correct === "true")?'list-group-item-success':
-                  (yourAnswer === "true" && question.correct === "false")?'list-group-item-danger':""}`}>
+                  (yourAnswer === "true" && question.correct === "false")?'list-group-item-danger':
+                      ""}`}>
+
             <div className="form-check">
               <input onClick={() => {
                 setYourAnswer("true")
@@ -42,36 +41,36 @@ const TrueFalseQuestion = (
                      type="radio"
                      name={question._id}
                      disabled={grade}/> True
-              {
-                grade &&
+              {grade &&
                 <>
-                  {
-                    (yourAnswer === "true" && question.correct === "true") &&
+                  {(yourAnswer === "true" && question.correct === "true") &&
                     <i className="fas fa-check wbdv-green align-middle float-right"/>
                   }
-                  {
-                    (yourAnswer === "true" && question.correct !== "true") &&
+                  {(yourAnswer === "true" && question.correct !== "true") &&
                     <i className="fas fa-times wbdv-red align-middle float-right"/>
                   }
                 </>
               }
             </div>
           </li>
+
           <li className={`list-group-item 
                                 ${!grade?"":
               (yourAnswer === "false" && question.correct === "false")?'list-group-item-success':
-                  (yourAnswer === "false" && question.correct === "true")?'list-group-item-danger':""}`}>
+                  (yourAnswer === "false" && question.correct === "true")?'list-group-item-danger':
+                      ""}`}>
+
             <div className="form-check">
-              <input onClick={() => {
-                setYourAnswer("false")
+
+              <input onClick={() => {setYourAnswer("false")
                 question = {...question, answer: "false"}
                 updateAnswers({...question})}}
                      className="form-check-input"
                      type="radio"
                      name={question._id}
                      disabled={grade}/> False
-              {
-                grade &&
+
+              {grade &&
                 <>
                   {
                     (yourAnswer === "false" && question.correct === "false") &&

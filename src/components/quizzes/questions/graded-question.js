@@ -3,20 +3,19 @@ import TrueFalseQuestion from "./true-false-question";
 import MultipleChoiceQuestion from "./multiple-choice-question";
 
 const GradedQuestion = (
-    {
-      question
+    {question
     }) => {
   const yourAnswer = question.answer
+
+
   return (
       <>
-        {
-          question.type === "TRUE_FALSE" &&
+        {question.type === "TRUE_FALSE" &&
           <TrueFalseQuestion question={question}
                              yourAnswer={yourAnswer}
                              grade={true}/>
         }
-        {
-          question.type === "MULTIPLE_CHOICE" &&
+        {question.type === "MULTIPLE_CHOICE" &&
           <MultipleChoiceQuestion question={question}
                                   yourAnswer={yourAnswer}
                                   grade={true}/>

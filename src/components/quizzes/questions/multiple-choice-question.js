@@ -9,35 +9,31 @@ const MultipleChoiceQuestion = (
       grade
     }) => {
 
+
   return (
       <li className="list-group-item">
         <h5>
           {question.question}
-          {
-            grade &&
+          {grade &&
             <div className="float-right">
-              {
-                question.correct === yourAnswer &&
+              {question.correct === yourAnswer &&
                 <i className="fas fa-check wbdv-green"/>
               }
-              {
-                question.correct !== yourAnswer &&
+              {question.correct !== yourAnswer &&
                 <i className="fas fa-times wbdv-red"/>
               }
             </div>
           }
         </h5>
         <ul className="list-group">
-          {
-            question.choices.map((choice) => {
+          {question.choices.map((choice) => {
               return (
                   <li className={`list-group-item 
                                 ${!grade?"":
                       (yourAnswer === choice && question.correct === choice)?'list-group-item-success':
                           (yourAnswer === choice && question.correct !== choice)?'list-group-item-danger':""}`}>
                     <div className="form-check">
-                      <input onClick={() => {
-                        setYourAnswer(choice)
+                      <input onClick={() => {setYourAnswer(choice)
                         question = {...question, answer: choice}
                         updateAnswers({...question})
                       }}
@@ -45,15 +41,14 @@ const MultipleChoiceQuestion = (
                              type="radio"
                              name={question._id}
                              disabled={grade}/> {choice}
-                      {
-                        grade &&
+
+                      {grade &&
                         <>
-                          {
-                            (yourAnswer === choice && question.correct === choice) &&
+                          {(yourAnswer === choice && question.correct === choice) &&
                             <i className="fas fa-check wbdv-green align-middle float-right"/>
                           }
-                          {
-                            (yourAnswer === choice && question.correct !== choice) &&
+
+                          {(yourAnswer === choice && question.correct !== choice) &&
                             <i className="fas fa-times wbdv-red align-middle float-right"/>
                           }
                         </>

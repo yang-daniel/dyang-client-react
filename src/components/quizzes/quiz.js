@@ -9,15 +9,17 @@ const Quiz = (
     {
       questions,
       findQuestionsForQuiz
-    }
-) => {
+    }) => {
   const {quizId, courseId} = useParams()
   const [answers, setAnswers] = useState()
   const [grade, setGrade] = useState(false)
+
   useEffect(() => {
     findQuestionsForQuiz(quizId)
     .then((questions) => setAnswers(questions.questions))
   }, [])
+
+
   return(
       <div>
         <h3>
@@ -27,8 +29,7 @@ const Quiz = (
           Quiz {quizId}
         </h3>
         <ul className="list-group">
-          {
-            questions.map((question) => {
+          {questions.map((question) => {
               return(
                   <Question question={question}
                             answers={answers}
@@ -63,4 +64,6 @@ const dtpm = (dispatch) => {
         }))
   }
 }
+
+
 export default connect(stpm, dtpm)(Quiz);

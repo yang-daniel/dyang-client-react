@@ -6,20 +6,19 @@ const QuizAttempts = (
     {
       courseId,
       quizId
-    }
-) => {
+    }) => {
   const [attempts, setAttempts] = useState([])
+
   useEffect(() => {
     quizzesService.findAttemptsForQuiz(quizId).then(attempts =>
         setAttempts(attempts)
-    )
-  }, [])
+    )}, [])
+
   return (
       <div>
         <ul className = "list-group">
           {console.log(attempts)}
-          {
-            attempts.map(attempt => {
+          {attempts.map(attempt => {
               const attemptNum = attempts.indexOf(attempt) + 1
               return(
                   <div>

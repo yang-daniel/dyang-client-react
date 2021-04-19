@@ -3,8 +3,7 @@ import TrueFalseQuestion from "./true-false-question";
 import MultipleChoiceQuestion from "./multiple-choice-question";
 
 const Question = (
-    {
-      question,
+    {question,
       answers,
       setAnswers,
       grade
@@ -15,6 +14,8 @@ const Question = (
     filteredAnswers.push(updatedAnswer)
     setAnswers(filteredAnswers)
   }
+
+
   return (
       <>
         {

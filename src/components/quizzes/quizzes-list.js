@@ -10,12 +10,13 @@ const QuizzesList = (
     {
       quizzes,
       findAllQuizzes
-    }
-) => {
+    }) => {
   const {courseId} = useParams()
+
   useEffect(() => {
-    findAllQuizzes()
-  }, [])
+    findAllQuizzes()}, [])
+
+
   return (
       <div>
         <h2>
@@ -24,6 +25,7 @@ const QuizzesList = (
           </Link>
           Quizzes
         </h2>
+
         <ul className = "list-group">
           {
             quizzes.map((quiz) => {
@@ -62,4 +64,5 @@ const dtpm = (dispatch) => {
               quizzes}))
   }
 }
+
 export default connect(stpm, dtpm)(QuizzesList);

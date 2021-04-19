@@ -7,6 +7,7 @@ const GradedQuiz = () => {
   const {quizId, courseId, attemptId} = useParams()
   const [attempt, setAttempt] = useState({})
   const [questions, setQuestions]= useState([])
+
   useEffect(() => {
     quizzesService.findAttemptById(quizId, attemptId)
     .then((response) => {
@@ -14,6 +15,8 @@ const GradedQuiz = () => {
       setQuestions(response.answers)
     })
   }, [])
+
+
   return(
       <div>
         <h3>
@@ -23,8 +26,7 @@ const GradedQuiz = () => {
           Quiz {quizId} - Attempt Score {attempt.score}
         </h3>
         <ul className="list-group">
-          {
-            questions.map((question) => {
+          {questions.map((question) => {
               return(
                   <GradedQuestion question={question}/>
               )
